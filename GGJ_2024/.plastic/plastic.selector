@@ -1,0 +1,4 @@
+repository "GGJ_2024@HorrorGame_2023@cloud"
+  path "/"
+    br "/main"
+    co "/main"
