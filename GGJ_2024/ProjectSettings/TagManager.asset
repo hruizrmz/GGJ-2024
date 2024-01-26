@@ -41,3 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 3944021847
+    locked: 0
+  - name: Puzzles
+    uniqueID: 994563217
+    locked: 0
+  - name: Items
+    uniqueID: 881240239
+    locked: 0
+  - name: UI
+    uniqueID: 2744121253
+    locked: 0
