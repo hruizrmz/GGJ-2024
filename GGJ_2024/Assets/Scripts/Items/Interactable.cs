@@ -7,7 +7,8 @@ public class Interactable : MonoBehaviour
     protected enum InteractiveTypes
     {
         Puzzle = 1,
-        Item = 2
+        Item = 2,
+        Icon = 3
     }
     protected InteractiveTypes type;
     public int ID;
@@ -29,15 +30,7 @@ public class Interactable : MonoBehaviour
                 if (GetComponent<Item>())
                 {
                     Item myItem = GetComponent<Item>();
-                    if (myItem.holding)
-                    {
-                        GetComponent<Item>().canDrag = true;
-                    }
-                    else
-                    {
-                        GetComponent<Item>().canDrag = false;
-                        // showtext
-                    }
+                    // showtext
                 }
             }
         }

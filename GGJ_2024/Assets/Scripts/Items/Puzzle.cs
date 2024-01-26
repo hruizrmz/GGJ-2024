@@ -9,14 +9,13 @@ public class Puzzle : Interactable
         type = InteractiveTypes.Puzzle;
         solved = false;
     }
-
     private void OnEnable()
     {
-        Item.SolvePuzzle += SolveMe;
+        Icon.SolvePuzzle += SolveMe;
     }
     private void OnDisable()
     {
-        Item.SolvePuzzle -= SolveMe;
+        Icon.SolvePuzzle -= SolveMe;
     }
     private void SolveMe(int ID)
     {

@@ -3,49 +3,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : Interactable
+public class Icon : Interactable
 {
-    public string itemName;
-    public Vector3 itemOriginalPos;
+    public ItemInfo itemInfo;
+    public Transform itemOriginalPos;
     private Vector3 mouseDragStart, itemDragStart;
-    public bool canDrag, dragging, holding;
-    public static event Action<int> SolvePuzzle; 
+    public bool dragging;
+    public static event Action<int> SolvePuzzle;
+    public static event Action<GameObject> UseItem;
+    public static event Action ChangeDrag;
 
     void Start()
     {
-        type = InteractiveTypes.Item;
-        canDrag = dragging = solved = false;
+        type = InteractiveTypes.Icon;
+        dragging = solved = false;
     }
 
     private void OnMouseDown()
     {
+        activeSprite.color = Color.white;
         mouseDragStart = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         itemDragStart = transform.localPosition;
-        activeSprite.color = Color.white;
+        if (!dragging) Icon.ChangeDrag?.Invoke();
     }
 
     private void OnMouseDrag()
     {
-        if (canDrag)
-        {
-            dragging = true;
-            transform.localPosition = itemDragStart + (Camera.main.ScreenToWorldPoint(Input.mousePosition) - mouseDragStart);
-            // transform.GetComponent<SpriteRenderer>().sprite = unsolved;
-        }
+        dragging = true;
+        transform.localPosition = itemDragStart + (Camera.main.ScreenToWorldPoint(Input.mousePosition) - mouseDragStart);
+        // transform.GetComponent<SpriteRenderer>().sprite = unsolved;
     }
 
     private void OnMouseUp()
     {
         if (dragging)
         {
+            Icon.ChangeDrag?.Invoke();
             dragging = false;
             if (!solved)
             {
-                transform.localPosition = itemOriginalPos;
+                transform.localPosition = Vector3.zero;
             }
             else
             {
-                Item.SolvePuzzle?.Invoke(ID);
+                solved = true;
+                Icon.UseItem?.Invoke(this.gameObject);
+                Icon.SolvePuzzle?.Invoke(ID);
                 Destroy(gameObject);
             }
         }
@@ -55,7 +58,6 @@ public class Item : Interactable
     {
         if (collision.gameObject.GetComponent<Puzzle>())
         {
-            activeSprite.color = Color.yellow;
             // transform.GetComponent<SpriteRenderer>().sprite = hover;
             if (this.ID == collision.gameObject.GetComponent<Puzzle>().ID)
             {
@@ -68,7 +70,6 @@ public class Item : Interactable
     {
         if (collision.gameObject.GetComponent<Puzzle>())
         {
-            activeSprite.color = Color.white;
             // transform.GetComponent<SpriteRenderer>().sprite = unsolved;
             if (this.ID == collision.gameObject.GetComponent<Puzzle>().ID)
             {

@@ -11,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - DragItems
   - 
   - 
   - 
@@ -52,4 +52,7 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 2744121253
+    locked: 0
+  - name: DragItems
+    uniqueID: 771309209
     locked: 0
