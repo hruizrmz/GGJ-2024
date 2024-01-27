@@ -11,20 +11,15 @@ public class Dialogue : MonoBehaviour
     public RawImage portraitComponent;
     public string[] characters, lines;
     public Texture[] portraits;
-    public static event Action ChangeInteractive;
+    public static event Action ChangeInteractive, StartTimer;
 
     public float textSpeed;
     private int index;
     private bool isTalking;
-    public bool isStoryDialogue;
+    public bool isStoryDialogue, isPassword, isDesktop, isBookDialogue;
 
     private void Start()
     {
-        if (isStoryDialogue)
-        {
-            Debug.Log("change enabled");
-            Dialogue.ChangeInteractive?.Invoke();
-        }
         if (!isTalking)
         {
             textComponent.text = string.Empty;
@@ -50,6 +45,7 @@ public class Dialogue : MonoBehaviour
 
     private void StartDialogue()
     {
+        Dialogue.ChangeInteractive?.Invoke();
         isTalking = true;
         index = 0;
         charComponent.text = characters[index];
@@ -81,19 +77,29 @@ public class Dialogue : MonoBehaviour
             if (isTalking)
             {
                 isTalking = false;
+                Dialogue.ChangeInteractive?.Invoke();
                 if (isStoryDialogue)
                 {
-                    Dialogue.ChangeInteractive?.Invoke();
+                    Dialogue.StartTimer?.Invoke();
+                }
+                else if (isPassword)
+                {
+                    GameObject.FindGameObjectWithTag("PC").GetComponent<PasswordController>().ShowPwdScreen();
+                }
+                else if (isDesktop)
+                {
+                    GameObject.FindGameObjectWithTag("PC").GetComponent<PasswordController>().ShowDesktopScreen();
+                }
+                else if (isBookDialogue)
+                {
+                    GameObject.FindGameObjectWithTag("Crowbar").transform.GetChild(0).gameObject.SetActive(true);
+                    GameObject.FindGameObjectWithTag("Books").transform.GetChild(0).gameObject.SetActive(true);
+                    GameObject.FindGameObjectWithTag("BooksItem").transform.GetChild(0).gameObject.SetActive(false);
                 }
                 gameObject.SetActive(false);
             }
             else
             {
-                if (isStoryDialogue)
-                {
-                    Debug.Log("change enabled");
-                    Dialogue.ChangeInteractive?.Invoke();
-                }
                 textComponent.text = string.Empty;
                 StartDialogue();
             }

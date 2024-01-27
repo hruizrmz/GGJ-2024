@@ -23,7 +23,7 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        PlayMusic("Mushroom");
+        PlayMusic("Mushroom 2");
     }
     public void PlayMusic(string name)
     {

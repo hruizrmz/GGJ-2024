@@ -10,7 +10,6 @@ public class TimerVideo : MonoBehaviour
     void Start()
     {
         StartCoroutine(RemoveAfterSeconds(5, video));
-        Debug.Log("Seconds passed");
     }
 
     IEnumerator RemoveAfterSeconds(int seconds, GameObject video)

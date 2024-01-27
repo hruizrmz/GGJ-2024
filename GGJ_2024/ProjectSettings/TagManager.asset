@@ -7,6 +7,22 @@ TagManager:
   - DialogueHolder
   - ItemDialogue
   - Interactive
+  - PC
+  - Crowbar
+  - Books
+  - BooksItem
+  - RustyLock
+  - OpenCloset
+  - PieceItem
+  - ClosetDoor
+  - CompletePainting
+  - StarKey
+  - Alarm
+  - GreenKey
+  - KeyReflection
+  - RoomDoor
+  - OpenDoor
+  - DoorDialogue
   layers:
   - Default
   - TransparentFX

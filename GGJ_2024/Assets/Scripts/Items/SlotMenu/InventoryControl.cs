@@ -8,7 +8,7 @@ public class InventoryControl : MonoBehaviour
 {
     public int size;
     private int maxSize = 3;
-    private bool draggingIcon;
+    private bool hoveringIcon, draggingIcon;
     [SerializeField] public Slot[] slots = new Slot[3];
     private Animator anim;
     public static event Action OpenMenu, CloseMenu;
@@ -19,12 +19,18 @@ public class InventoryControl : MonoBehaviour
         Item.TakeItem += AddItem;
         Icon.UseItem += RemoveItem;
         Icon.ChangeDrag += ChangeIconDrag;
+        Icon.ChangeHover += ChangeIconHover;
+        Timer.OnTimerCompleted += DeleteMe;
+        AlarmController.AlarmSilenced += DeleteMe;
     }
     private void OnDisable()
     {
         Item.TakeItem -= AddItem;
         Icon.UseItem -= RemoveItem;
         Icon.ChangeDrag -= ChangeIconDrag;
+        Icon.ChangeHover -= ChangeIconHover;
+        Timer.OnTimerCompleted -= DeleteMe;
+        AlarmController.AlarmSilenced -= DeleteMe;
     }
     #endregion
 
@@ -47,6 +53,11 @@ public class InventoryControl : MonoBehaviour
         }
     }
 
+    public void ChangeIconHover()
+    {
+        hoveringIcon = !hoveringIcon;
+    }
+
     public void PointerEnter()
     {
         InventoryControl.OpenMenu?.Invoke();
@@ -58,7 +69,7 @@ public class InventoryControl : MonoBehaviour
 
     public void PointerExit()
     {
-        if (!draggingIcon)
+        if (!draggingIcon && !hoveringIcon)
         {
             InventoryControl.CloseMenu?.Invoke();
             anim.ResetTrigger("OpenTrigger");
@@ -107,5 +118,10 @@ public class InventoryControl : MonoBehaviour
                 break;
             }
         }
+    }
+
+    private void DeleteMe()
+    {
+        Destroy(gameObject);
     }
 }

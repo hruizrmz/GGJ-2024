@@ -8,15 +8,35 @@ public class Icon : Interactable
     public ItemInfo itemInfo;
     public Transform itemOriginalPos;
     private Vector3 mouseDragStart, itemDragStart;
-    public bool dragging;
+    public bool hovering, dragging;
     public static event Action<int> SolvePuzzle;
     public static event Action<GameObject> UseItem;
-    public static event Action ChangeDrag;
+    public static event Action ChangeDrag, ChangeHover;
+
+    private void OnEnable()
+    {
+        Timer.OnTimerCompleted += DeleteMe;
+        AlarmController.AlarmSilenced -= DeleteMe;
+    }
+    private void OnDisable()
+    {
+        Timer.OnTimerCompleted -= DeleteMe;
+        AlarmController.AlarmSilenced -= DeleteMe;
+    }
 
     void Start()
     {
         type = InteractiveTypes.Icon;
-        dragging = solved = false;
+        hovering = dragging = solved = false;
+    }
+
+    private void OnMouseOver()
+    {
+        if (!hovering)
+        {
+            hovering = true;
+            Icon.ChangeHover?.Invoke();
+        }
     }
 
     private void OnMouseDown()
@@ -53,6 +73,15 @@ public class Icon : Interactable
         }
     }
 
+    private void OnMouseExit()
+    {
+        if (hovering)
+        {
+            hovering = false;
+            Icon.ChangeHover?.Invoke();
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<Puzzle>())
@@ -73,5 +102,10 @@ public class Icon : Interactable
                 this.solved = false;
             }
         }
+    }
+
+    private void DeleteMe()
+    {
+        Destroy(gameObject);
     }
 }

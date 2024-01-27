@@ -11,6 +11,7 @@ public class Switch : MonoBehaviour
     public GameObject NextButton;
     public GameObject BackButton;
     public GameObject Credits;
+    public GameObject Controls;
     public GameObject MainMenu;
     int index;
     // Start is called before the first frame update
@@ -57,7 +58,6 @@ public class Switch : MonoBehaviour
             background[i].gameObject.SetActive(false);
             background[index].gameObject.SetActive(true);
         }
-        Debug.Log(index);
     }
 
     public void Previous()
@@ -69,7 +69,6 @@ public class Switch : MonoBehaviour
             background[i].gameObject.SetActive(false);
             background[index].gameObject.SetActive(true);
         }
-        Debug.Log(index);
     }
 
     public void QuitGame()
@@ -98,5 +97,17 @@ public class Switch : MonoBehaviour
     {
         MainMenu.SetActive(true);
         Credits.SetActive(false);
+    }
+
+    public void ControlsMenu()
+    {
+        Controls.SetActive(true);
+        MainMenu.SetActive(false);
+    }
+
+    public void ControlsButton()
+    {
+        MainMenu.SetActive(true);
+        Controls.SetActive(false);
     }
 }

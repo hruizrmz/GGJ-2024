@@ -8,10 +8,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 1698516ff7ea94fbbb950dd8bdcc7c20
-  - enabled: 1
-    path: Assets/Scenes/Level.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
     path: Assets/Scenes/Pablo's Scene.unity
     guid: fa32f31eaae33ab42b6525f298d20d6e
+  - enabled: 0
+    path: Assets/Scenes/Dialogues.unity
+    guid: 638271858e0cd6a4989a9b939fc7ab2f
+  - enabled: 1
+    path: Assets/Scenes/Level.unity
+    guid: d6b614820f5ba884f8f865f893c2b30d
   m_configObjects: {}

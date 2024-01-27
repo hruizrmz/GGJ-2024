@@ -16,10 +16,6 @@ public class Interactable : MonoBehaviour
     public SpriteRenderer activeSprite;
     private Color originalColor;
 
-    public void HandleClick()
-    {
-    }
-
     void OnMouseEnter()
     {
         if (!solved)
