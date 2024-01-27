@@ -5,8 +5,19 @@ using UnityEngine;
 
 public class Item : Interactable
 {
+    public GameObject dialogue;
     public ItemInfo itemInfo;
-    public static event Action<GameObject> TakeItem; 
+    public static event Action<GameObject> TakeItem;
+    private bool isEnabled = true;
+
+    private void OnEnable()
+    {
+        Dialogue.ChangeInteractive += ChangeEnabled;
+    }
+    private void OnDisable()
+    {
+        Dialogue.ChangeInteractive -= ChangeEnabled;
+    }
 
     void Start()
     { 
@@ -16,7 +27,19 @@ public class Item : Interactable
 
     private void OnMouseDown()
     {
-        activeSprite.color = Color.white;
-        Item.TakeItem?.Invoke(this.gameObject);
+        if (isEnabled)
+        {
+            activeSprite.color = Color.white;
+            Item.TakeItem?.Invoke(this.gameObject);
+            foreach (Transform child in GameObject.FindGameObjectWithTag("DialogueHolder").transform)
+            {
+                child.gameObject.SetActive(false);
+            }
+            dialogue.SetActive(true);
+        }
+    }
+    private void ChangeEnabled()
+    {
+        isEnabled = !isEnabled;
     }
 }

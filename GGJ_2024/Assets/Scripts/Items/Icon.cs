@@ -31,7 +31,6 @@ public class Icon : Interactable
     {
         dragging = true;
         transform.localPosition = itemDragStart + (Camera.main.ScreenToWorldPoint(Input.mousePosition) - mouseDragStart);
-        // transform.GetComponent<SpriteRenderer>().sprite = unsolved;
     }
 
     private void OnMouseUp()
@@ -58,7 +57,6 @@ public class Icon : Interactable
     {
         if (collision.gameObject.GetComponent<Puzzle>())
         {
-            // transform.GetComponent<SpriteRenderer>().sprite = hover;
             if (this.ID == collision.gameObject.GetComponent<Puzzle>().ID)
             {
                 this.solved = true;
@@ -70,7 +68,6 @@ public class Icon : Interactable
     {
         if (collision.gameObject.GetComponent<Puzzle>())
         {
-            // transform.GetComponent<SpriteRenderer>().sprite = unsolved;
             if (this.ID == collision.gameObject.GetComponent<Puzzle>().ID)
             {
                 this.solved = false;

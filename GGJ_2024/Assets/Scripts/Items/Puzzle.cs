@@ -4,18 +4,34 @@ using UnityEngine;
 
 public class Puzzle : Interactable
 {
+    public GameObject dialogue;
+    private bool isEnabled = true;
+
+    private void OnEnable()
+    {
+        Icon.SolvePuzzle += SolveMe;
+        Dialogue.ChangeInteractive += ChangeEnabled;
+    }
+    private void OnDisable()
+    {
+        Icon.SolvePuzzle -= SolveMe;
+        Dialogue.ChangeInteractive -= ChangeEnabled;
+    }
     private void Start()
     {
         type = InteractiveTypes.Puzzle;
         solved = false;
     }
-    private void OnEnable()
+    private void OnMouseDown()
     {
-        Icon.SolvePuzzle += SolveMe;
-    }
-    private void OnDisable()
-    {
-        Icon.SolvePuzzle -= SolveMe;
+        if (!solved && isEnabled)
+        {
+            foreach (Transform child in GameObject.FindGameObjectWithTag("DialogueHolder").transform)
+            {
+                child.gameObject.SetActive(false);
+            }
+            dialogue.SetActive(true);
+        }
     }
     private void SolveMe(int ID)
     {
@@ -23,7 +39,10 @@ public class Puzzle : Interactable
         {
             solved = true;
             activeSprite.color = Color.green;
-            // transform.GetComponent<SpriteRenderer>().sprite = solved;
         }
+    }
+    private void ChangeEnabled()
+    {
+        isEnabled = !isEnabled;
     }
 }

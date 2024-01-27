@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99f192775a5d32d4f82389345a7c7d77, type: 3}
   m_Name: Piece
   m_EditorClassIdentifier: 
-  ID: 9
+  ID: 4
   itemName: Painting Piece
   prefab: {fileID: 3905184663082121980, guid: 7b83dd27f8cc76440a4474c733ab1555, type: 3}

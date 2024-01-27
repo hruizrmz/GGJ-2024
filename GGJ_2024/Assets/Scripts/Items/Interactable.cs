@@ -12,36 +12,20 @@ public class Interactable : MonoBehaviour
     }
     protected InteractiveTypes type;
     public int ID;
-    // public text bottomText;
     public bool solved;
     public SpriteRenderer activeSprite;
-    // public Sprite unsolved, solved, hover;
+    private Color originalColor;
 
     public void HandleClick()
     {
-        if (!solved)
-        {
-            if ((int)type == 1)
-            {
-                // show text
-            }
-            else if ((int)type == 2)
-            {
-                if (GetComponent<Item>())
-                {
-                    Item myItem = GetComponent<Item>();
-                    // showtext
-                }
-            }
-        }
     }
 
     void OnMouseEnter()
     {
         if (!solved)
         {
-            activeSprite.color = Color.red;
-            // transform.GetComponent<SpriteRenderer>().sprite = hover;
+            originalColor = activeSprite.color;
+            activeSprite.color = Color.grey;
         }
     }
 
@@ -49,8 +33,7 @@ public class Interactable : MonoBehaviour
     {
         if (!solved)
         {
-            activeSprite.color = Color.white;
-            // transform.GetComponent<SpriteRenderer>().sprite = unsolved;
+            activeSprite.color = originalColor;
         }
     }
 }
