@@ -77,7 +77,7 @@ public class Switch : MonoBehaviour
 
     public void StartDream()
     {
-        SceneManager.LoadScene("Helena");
+        SceneManager.LoadScene("Level");
     }
 
     public void TurnOnCutscenes() 

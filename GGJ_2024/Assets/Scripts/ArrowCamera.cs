@@ -10,19 +10,19 @@ public class ArrowCamera : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            Targetposition.transform.position = new Vector3(19, 0, -10);
+            Targetposition.transform.position = new Vector3(21, 0, -10);
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            Targetposition.transform.position = new Vector3(-19, 0, -10);
+            Targetposition.transform.position = new Vector3(-21, 0, -10);
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            Targetposition.transform.position = new Vector3(0, -10, -10);
+            Targetposition.transform.position = new Vector3(0, -13, -10);
         }
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            Targetposition.transform.position = new Vector3(0, 11, -10);
+            Targetposition.transform.position = new Vector3(0, 0, -10);
         }
     }
 }

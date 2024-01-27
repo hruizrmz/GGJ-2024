@@ -81,7 +81,7 @@ public class InventoryControl : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     private void AddItem(GameObject newItem)
     {
-        if (size<(maxSize-1))
+        if (size<maxSize)
         {
             for (int i = 0; i < slots.Length; i++)
             {

@@ -23,7 +23,7 @@ public class Timer : MonoBehaviour
             {
                 onTimerCompleted?.Invoke();
                 timeLeft = 0f;
-                gameObject.SetActive(false);
+                this.enabled = false;
 
 
             }
