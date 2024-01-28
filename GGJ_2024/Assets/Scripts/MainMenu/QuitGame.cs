@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class QuitGame : MonoBehaviour
 {
     public void QuitGameFunction()
     {
-        Application.Quit();
+        AudioManager.instance.musicSource.Stop();
+        AudioManager.instance.sfxSource.Stop();
+        AudioManager.instance.PlayMusic("Opening");
+        SceneManager.LoadScene("MainMenu");
     }
 }

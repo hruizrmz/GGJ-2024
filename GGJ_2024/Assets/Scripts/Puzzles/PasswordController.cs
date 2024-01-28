@@ -28,6 +28,7 @@ public class PasswordController : MonoBehaviour
     {
         passwordScreen.SetActive(false);
         PasswordController.ChangeInteractive?.Invoke();
+        AudioManager.instance.sfxSource.Stop();
     }
 
     public void ShowDesktopScreen()
@@ -46,6 +47,7 @@ public class PasswordController : MonoBehaviour
     {
         desktopScreen.SetActive(false);
         PasswordController.ChangeInteractive?.Invoke();
+        AudioManager.instance.sfxSource.Stop();
     }
 
     public void CheckPwd()

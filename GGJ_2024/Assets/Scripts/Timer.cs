@@ -34,6 +34,8 @@ public class Timer : MonoBehaviour
                 if (timeLeft <= 0f)
                 {
                     OnTimerCompleted?.Invoke();
+                    AudioManager.instance.musicSource.Stop();
+                    AudioManager.instance.PlaySFX("TimesUp");
                     badEndingScreen.SetActive(true);
                     Destroy(gameObject);
                 }

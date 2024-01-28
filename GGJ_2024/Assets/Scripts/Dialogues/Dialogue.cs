@@ -64,6 +64,7 @@ public class Dialogue : MonoBehaviour
 
     private void NextLine()
     {
+        AudioManager.instance.PlayClick("ButtonClick");
         if (index < lines.Length - 1)
         {
             index++;
@@ -80,6 +81,7 @@ public class Dialogue : MonoBehaviour
                 Dialogue.ChangeInteractive?.Invoke();
                 if (isStoryDialogue)
                 {
+                    AudioManager.instance.PlayMusic("Level");
                     Dialogue.StartTimer?.Invoke();
                 }
                 else if (isPassword)

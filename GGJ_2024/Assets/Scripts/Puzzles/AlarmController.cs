@@ -11,6 +11,8 @@ public class AlarmController : MonoBehaviour
     private void OnMouseDown()
     {
         AlarmController.AlarmSilenced?.Invoke();
+        AudioManager.instance.musicSource.Stop();
+        AudioManager.instance.PlaySFX("Victory");
         goodEndingScreen.SetActive(true);
         Destroy(gameObject);
     }

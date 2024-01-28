@@ -14,13 +14,12 @@ public class Switch : MonoBehaviour
     public GameObject Controls;
     public GameObject MainMenu;
     int index;
-    // Start is called before the first frame update
+
     void Start()
     {
         index = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (index >= 9)
@@ -29,34 +28,59 @@ public class Switch : MonoBehaviour
         if (index < 0)
             index = 0;
 
-
         if (index == 0)
         {
             background[0].gameObject.SetActive(true);
             BackButton.SetActive(false);
-        } else {
+        }
+        else
+        {
             BackButton.SetActive(true);
         }
-
 
         if (index == 9)
         {
             NextButton.SetActive(false);
-        } else {
+        }
+        else
+        {
             NextButton.SetActive(true);
         }
-
-
     }
 
     public void Next() 
     {
-        index += 1;
-
         for(int i = 0 ; i < background.Length; i++)
         {
             background[i].gameObject.SetActive(false);
-            background[index].gameObject.SetActive(true);
+        }
+        index += 1;
+        background[index].gameObject.SetActive(true);
+
+        switch (index)
+        {
+            case 1:
+                AudioManager.instance.sfxSource.Stop();
+                AudioManager.instance.PlaySFX("Whistle");
+                break;
+            case 2:
+                AudioManager.instance.sfxSource.Stop();
+                AudioManager.instance.PlaySFX("Tada");
+                break;
+            case 5:
+                AudioManager.instance.sfxSource.Stop();
+                AudioManager.instance.PlaySFX("SitDown");
+                break;
+            case 6:
+                AudioManager.instance.sfxSource.Stop();
+                AudioManager.instance.PlaySFX("EatPaste");
+                break;
+            case 9:
+                AudioManager.instance.sfxSource.Stop();
+                AudioManager.instance.PlaySFX("Sleep");
+                break;
+            default:
+                break;
         }
     }
 
@@ -73,40 +97,46 @@ public class Switch : MonoBehaviour
 
     public void QuitGame()
     {
+        AudioManager.instance.PlayClick("ButtonClick");
         Application.Quit();
     }
 
     public void StartDream()
     {
+        AudioManager.instance.musicSource.Stop();
         SceneManager.LoadScene("Level");
     }
 
     public void TurnOnCutscenes() 
     {
-        
+        AudioManager.instance.PlaySFX("WaterSplash");
         cutscenes.SetActive(true);
     }
 
     public void CreditsMenu()
     {
+        AudioManager.instance.PlayClick("ButtonClick");
         Credits.SetActive(true);
         MainMenu.SetActive(false);
     }
 
     public void CreditsButton()
     {
+        AudioManager.instance.PlayClick("ButtonClick");
         MainMenu.SetActive(true);
         Credits.SetActive(false);
     }
 
     public void ControlsMenu()
     {
+        AudioManager.instance.PlayClick("ButtonClick");
         Controls.SetActive(true);
         MainMenu.SetActive(false);
     }
 
     public void ControlsButton()
     {
+        AudioManager.instance.PlayClick("ButtonClick");
         MainMenu.SetActive(true);
         Controls.SetActive(false);
     }

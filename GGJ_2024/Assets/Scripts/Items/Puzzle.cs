@@ -6,6 +6,7 @@ using UnityEngine;
 public class Puzzle : Interactable
 {
     public GameObject dialogue;
+    public string soundName;
     private bool isEnabled = true;
     public bool isLockGone, isPaintingGone, isKeyUsed, isRedLockGone, isDoorDialogue;
 
@@ -35,6 +36,7 @@ public class Puzzle : Interactable
     {
         if (!solved && isEnabled)
         {
+            AudioManager.instance.PlaySFX(soundName);
             foreach (Transform child in GameObject.FindGameObjectWithTag("DialogueHolder").transform)
             {
                 child.gameObject.SetActive(false);
